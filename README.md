@@ -36,6 +36,7 @@ terraform plan -out main.tfplan
 ```
 terraform apply main.tfplan
 ```
+![image](https://user-images.githubusercontent.com/49791498/128613259-ba8b7756-4ad9-4dae-b246-48b5e821d609.png)
 
 ### Large file error
 If you encounter this error, run the following code:
