@@ -3,39 +3,51 @@ Infrastructure as code, refers to the act of writing scripts to set up your enti
 
 ## Spining up multiple manifests on Azure (Azure VM cluster)
 -   First, create an [Azure account](www.portal.azure.com)
--   Call the previously created Resource group ```TerraformGroup```
+-   Create an Azure provider and a resource group
 -   Create a Virtual network within a designated address space
 - Create a Public IP address
 - Create a load balancer
-- Create a Network Interface and asign count to be the number of Network interfaces for your VMs
-- Create a Managed disk and asign count to be the number of Network interfaces for your VMs
+- Create a Network Interface and asign count to 2
+- Create a Managed disk and asign count to 2
 - Create an availability set
-- Create a virtual machine
+- Create a virtual machine and assign count to 20 since we want to provision a cluster of 20 VMs
 
 ### terraform init, plan and apply
 ```
 terraform init
 ```
-
+![image](https://user-images.githubusercontent.com/49791498/128607666-01614ae4-6096-4be3-afd3-1a87cf150d21.png)
 
 ```
 terraform fmt
 ```
-
+![image](https://user-images.githubusercontent.com/49791498/128607977-7a9bfb6b-9222-4ea8-a8dd-e1f21d826679.png)
 
 ```
 terraform validate
 ```
+![image](https://user-images.githubusercontent.com/49791498/128608395-91aae77c-17aa-4ed3-97e9-7949dcc9112d.png)
 
 ```
 terraform plan -out main.tfplan
 ```
-
+![image](https://user-images.githubusercontent.com/49791498/128608523-90ab45ed-006b-4f79-a39a-6725d0ba11cd.png)
 
 ```
 terraform apply main.tfplan
 ```
 
+### Large file error
+If you encounter this error, run the following code:
+```
+git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch <large file to be ignored>'
+```
+
+### import error
+If you encounter this error, run the following code:
+```
+terraform import azurerm_network_interface.<resource name> /subscriptions/<path to file>
+```
 
 ### ssh into your VM
 On the Azure portal, open up an Azure terminal and type in the following command, ```az vm show --resource-group azurerm_resource_group name --name vm_name -d --query [publicIps] -o tsv``` to view the public IP of your VM.
