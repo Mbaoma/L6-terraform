@@ -53,6 +53,8 @@ On the Azure portal, open up an Azure terminal and type in the following command
 Then SSH into your VM by typing, ```ssh -i <path to public SSH key> <admin_username>@<public IP address>``` on your terminal
 ![image](https://user-images.githubusercontent.com/49791498/128588189-6d6b5baf-b303-4c1c-8cf2-80ebb4a6b2e4.png)
 
+### Running instance
+![image](https://user-images.githubusercontent.com/49791498/128589372-8e889b20-05c1-415f-88fc-13c876d1ce70.png)
 
 More details can be found on the [Microsoft Learn website](https://docs.microsoft.com/en-us/azure/developer/terraform/create-linux-virtual-machine-with-infrastructure?source=docs).
 
