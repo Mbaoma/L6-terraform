@@ -1,16 +1,23 @@
 # L6-terraform
 Infrastructure as code, refers to the act of writing scripts to set up your entire infrastructure (from creation of Virtual Machines, to load balancers)when run. This project uses Terraform to set up architecture of a project.
 
+Due to my subscription, I will provision 5 different resource groups with 4VMs each.
+
 ## Spining up multiple manifests on Azure (Azure VM cluster)
 -   First, create an [Azure account](www.portal.azure.com)
 -   Create an Azure provider and a resource group
 -   Create a Virtual network within a designated address space
 - Create a Public IP address
 - Create a load balancer
-- Create a Network Interface and asign count to 2
-- Create a Managed disk and asign count to 2
+- Create a Network Interface and asign count to 20
+- Create a Managed disk and asign count to 20
 - Create an availability set
 - Create a virtual machine and assign count to 20 since we want to provision a cluster of 20 VMs
+
+**You might be asked to login to your Azure account, run the code below to login:**
+```
+az login
+```
 
 ### terraform init, plan and apply
 ```
@@ -31,12 +38,12 @@ terraform validate
 ```
 terraform plan -out main.tfplan
 ```
-![image](https://user-images.githubusercontent.com/49791498/128608523-90ab45ed-006b-4f79-a39a-6725d0ba11cd.png)
+![image](https://user-images.githubusercontent.com/49791498/128878200-02e8f330-48bf-4126-a79b-acd250a3ba24.png)
 
 ```
 terraform apply main.tfplan
 ```
-![image](https://user-images.githubusercontent.com/49791498/128613259-ba8b7756-4ad9-4dae-b246-48b5e821d609.png)
+![image](https://user-images.githubusercontent.com/49791498/128908749-949dca13-7abe-4556-b281-317fb979ad1d.png)
 
 ### Large file error
 If you encounter this error, run the following code:
@@ -51,11 +58,16 @@ terraform import azurerm_network_interface.<resource name> /subscriptions/<path 
 ```
 
 ### ssh into your VM
-On the Azure portal, open up an Azure terminal and type in the following command, ```az vm show --resource-group azurerm_resource_group name --name vm_name -d --query [publicIps] -o tsv``` to view the public IP of your VM.
-![image](https://user-images.githubusercontent.com/49791498/128586473-aa24af6a-b619-45f2-ab38-76569c14b186.png)
+-    On the Azure portal, open up an Azure terminal and type in the following command, 
+        ```
+        az vm show --resource-group azurerm_resource_group name --name vm_name -d --query [publicIps] -o tsv
+        ``` 
+        to view the public IP of your VM.
 
-Then SSH into your VM by typing, ```ssh -i <path to public SSH key> <admin_username>@<public IP address>``` on your terminal
-![image](https://user-images.githubusercontent.com/49791498/128588189-6d6b5baf-b303-4c1c-8cf2-80ebb4a6b2e4.png)
+        ![image](https://user-images.githubusercontent.com/49791498/128586473-aa24af6a-b619-45f2-ab38-76569c14b186.png)
+
+-    Then SSH into your VM by typing, ```ssh -i <path to public SSH key> <admin_username>@<public IP address>``` on your terminal
+    ![image](https://user-images.githubusercontent.com/49791498/128588189-6d6b5baf-b303-4c1c-8cf2-80ebb4a6b2e4.png)
 
 ### Running instance
 ![image](https://user-images.githubusercontent.com/49791498/128589372-8e889b20-05c1-415f-88fc-13c876d1ce70.png)
